@@ -91,15 +91,15 @@ async def delete_customer(customer_id: int):
     return {"error": "Customer not found"}
 
 
-@app.get("/order/{oc_id}")
-async def get_order(oc_id: str):
+@app.get("/order/{order_number}")
+async def get_order(order_number: str):
     # Buscar la orden principal
-    order = next((o for o in orders if o["oc_id"] == oc_id), None)
+    order = next((o for o in orders if o["oc_id"] == order_number), None)
     if not order:
         return {"error": "Order not found"}
     
     # Buscar los detalles asociados
-    details = [d for d in ordersDetails if d["oc_id"] == oc_id]
+    details = [d for d in ordersDetails if d["oc_id"] == order_number]
     
     # Combinar la información
     return {
